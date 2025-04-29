@@ -2,7 +2,6 @@ const gameBoard = (function (){
     const board = ["", "", "",
                    "", "", "",
                    "", "", ""];
-
     return {
         getBoard: () => [...board], //clones current state of board
 
@@ -31,7 +30,7 @@ function createPlayer(playerName, playerMarker){
 }
 
 
-const gameFlow = (function () { //change this to object
+function gameFlow (){
 
     let player1, player2;
     let activePlayer;
@@ -46,14 +45,42 @@ const gameFlow = (function () { //change this to object
         activePlayer = player1;
         gameOver = false;
         gameBoard.resetBoard();
+        printNewRound()    
     }
+
+    const getGameOver = () => {return gameOver}
+    
 
     function switchPlayers(){
         activePlayer = activePlayer === player1 ? player2 : player1
     }
 
+    const printNewRound = () => {
+        console.log(gameBoard.getBoard());
+        console.log(`${activePlayer.name}'s turn.`);
+    }
 
+    function playRound(){
+        let index = prompt(`${activePlayer.name}, Please enter where you want to place marker (1-9)`);
+        while(!gameBoard.canMove(index-1, activePlayer.marker)){
+            console.log("That place is taken or is off the grid, please try again");
+            index = prompt(`${activePlayer.name}, Please enter marker at valid location (1-9)`);
+        }
+        //logic to check for wins
+        switchPlayers();
+        printNewRound();
+    }
+    init()
+
+    return{
+        playRound,
+        getGameOver,
+    }
     
-})();
+};
 
-const game = gameFlow();
+let game = gameFlow();
+
+while (game.getGameOver){
+    game.playRound()
+}
