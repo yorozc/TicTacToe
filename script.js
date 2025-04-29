@@ -38,10 +38,33 @@ function gameFlow(board){
 
     const player1 = createPlayer(user1, "X");
     const player2 = createPlayer(user2, "O");
+    let playerTurn = true;
 
-    console.log(player1)
-    console.log(player2)
+    //allow user to input marker into gameboard via prompt
+    if (playerTurn){ //if true, player 1 goes
+        let index = prompt("Input spot on board that you want to fill (0-8)");
+        if (!(board.canMove(index, player1.marker))){
+            console.log("Spot is not empty try again!");
+            
+        }else{
+            playerTurn = false;
+        }
+
+    }else{ //if false, player 2 goes
+        let index = prompt("Input spot on board that you want to fill (0-8)");
+        if (!(board.canMove(index, player2.marker))){
+            console.log("Spot is not empty try again!");
+
+        }else{
+            playerTurn = true;
+        }
+    }
+
+    console.log(board.getBoard())
+    console.log(playerTurn)
+
     
 }
 
-gameFlow(gameBoard.board);
+gameFlow(gameBoard);
+
