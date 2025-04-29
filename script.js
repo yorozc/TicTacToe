@@ -31,40 +31,29 @@ function createPlayer(playerName, playerMarker){
 }
 
 
-function gameFlow(board){
-    //prompt user for player name and assign marker
-    let user1 = prompt("Please enter player one's name:", "User1");
-    let user2 = prompt("Please enter player two's name:", "User2");
+const gameFlow = (function () { //change this to object
 
-    const player1 = createPlayer(user1, "X");
-    const player2 = createPlayer(user2, "O");
-    let playerTurn = true;
+    let player1, player2;
+    let activePlayer;
+    let gameOver = false;
 
-    //allow user to input marker into gameboard via prompt
-    if (playerTurn){ //if true, player 1 goes
-        let index = prompt("Input spot on board that you want to fill (0-8)");
-        if (!(board.canMove(index, player1.marker))){
-            console.log("Spot is not empty try again!");
-            
-        }else{
-            playerTurn = false;
-        }
+    function init(){
+        let user1 = prompt("Please enter player one's name:", "User1");
+        let user2 = prompt("Please enter player two's name:", "User2");
 
-    }else{ //if false, player 2 goes
-        let index = prompt("Input spot on board that you want to fill (0-8)");
-        if (!(board.canMove(index, player2.marker))){
-            console.log("Spot is not empty try again!");
-
-        }else{
-            playerTurn = true;
-        }
+        player1 = createPlayer(user1, "X");
+        player2 = createPlayer(user2, "O");
+        activePlayer = player1;
+        gameOver = false;
+        gameBoard.resetBoard();
     }
 
-    console.log(board.getBoard())
-    console.log(playerTurn)
+    function switchPlayers(){
+        activePlayer = activePlayer === player1 ? player2 : player1
+    }
+
 
     
-}
+})();
 
-gameFlow(gameBoard);
-
+const game = gameFlow();
