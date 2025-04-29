@@ -1,7 +1,7 @@
 const gameBoard = (function (){
-    const board = ["x", "o", "x",
-                   "x", "o", "x",
-                   "x", "o", "x"];
+    const board = ["", "", "",
+                   "", "", "",
+                   "", "", ""];
 
     return {
         getBoard: () => [...board], //clones current state of board
@@ -19,9 +19,6 @@ const gameBoard = (function (){
     }
 })();
 
-gameBoard.resetBoard();
-console.log(gameBoard.getBoard())
-
 function createPlayer(playerName, playerMarker){
     return {
         name: playerName,
@@ -35,6 +32,15 @@ function createPlayer(playerName, playerMarker){
 
 
 function gameFlow(board){
+    //prompt user for player name and assign marker
+    let user1 = prompt("Please enter player one's name:", "User1");
+    let user2 = prompt("Please enter player two's name:", "User2");
+
+    const player1 = createPlayer(user1, "X");
+    const player2 = createPlayer(user2, "O");
+
+    console.log(player1)
+    console.log(player2)
     
 }
 
