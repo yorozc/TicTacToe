@@ -17,18 +17,25 @@ const gameBoard = (function (){
         },
 
         checkWins: (name, gameOver) => {
-            if ((board[0] && board[0] == board[1] && board[1] == board[2]) ||
+            if ((board[0] && board[0] == board[1] && board[1] == board[2]) || //horizontal
                 (board[3] && board[3] == board[4] && board[4] == board[5]) ||
                 (board[6] && board[6] == board[7] && board[7] == board[8])){
                 console.log(`${name} has won!`);
                 gameOver = true;
                 return gameOver;
-            }else if ((board[0] && board[0] == board[4] && board[4] == board[8]) ||
+            }else if ((board[0] && board[0] == board[4] && board[4] == board[8]) || //diagonal
                       (board[2] && board[2] == board[4] && board[4] == board[6])){
                 console.log(`${name} has won!`);
                 gameOver = true;
                 return gameOver;
                 
+            }else if ((board[0] && board[0] == board[3] && board[3] == board[6]) || //vertical
+                      (board[1] && board[1] == board[4] && board[4] == board[7]) ||
+                      (board[2] && board[2] == board[5] && board[5] == board[8])){
+                console.log(`${name} has won!`);
+                gameOver = true;
+                return gameOver;
+
             }else{
                 if (!board.includes("")){
                     console.log("IT'S A DRAW!");
