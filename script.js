@@ -23,6 +23,12 @@ const gameBoard = (function (){
                 console.log(`${name} has won!`);
                 gameOver = true;
                 return gameOver;
+            }else if ((board[0] && board[0] == board[4] && board[4] == board[8]) ||
+                      (board[2] && board[2] == board[4] && board[4] == board[6])){
+                console.log(`${name} has won!`);
+                gameOver = true;
+                return gameOver;
+                
             }else{
                 if (!board.includes("")){
                     console.log("IT'S A DRAW!");
@@ -52,7 +58,6 @@ function gameFlow(){
     let player1, player2;
     let activePlayer;
     let gameOver = false;
-    let draw = false;
 
     const init = () => {
         let user1 = prompt("Please enter player one's name:", "User1");
