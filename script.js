@@ -21,10 +21,15 @@ const gameBoard = (function (){
                 console.log(`${name} has won!`);
                 gameOver = true;
                 return gameOver;
+            }else{
+                if (!board.includes("")){
+                    console.log("IT'S A DRAW!");
+                    gameOver = true;
+                    return gameOver;
+                }
+                
             }
-        
         }
-
     }
 })();
 
@@ -45,6 +50,7 @@ function gameFlow(){
     let player1, player2;
     let activePlayer;
     let gameOver = false;
+    let draw = false;
 
     const init = () => {
         let user1 = prompt("Please enter player one's name:", "User1");
@@ -70,6 +76,18 @@ function gameFlow(){
         console.log(`${activePlayer.name}'s turn.`);
     }
 
+    const reset = () => {
+        let reset = prompt("Do you want to restart? yes or no");
+        if (reset.toLowerCase() == "y" || reset.toLowerCase() == "yes"){
+            gameOver = false;
+            init();
+            console.log("Game restarted");
+        }else{
+            console.log("Game will not be restarted");
+            gameOver = true;
+        }
+    }
+
     const playRound = () => {
         let index = prompt(`${activePlayer.name}, Please enter where you want to place marker (1-9)`);
         while(!gameBoard.canMove(index-1, activePlayer.marker)){
@@ -87,18 +105,6 @@ function gameFlow(){
     }
 
     init();
-
-    const reset = () => {
-        let reset = prompt("Do you want to restart? yes or no");
-        if (reset.toLowerCase() == "y" || reset.toLowerCase() == "yes"){
-            gameOver = false;
-            init();
-            console.log("Game restarted");
-        }else{
-            console.log("Game will not be restarted");
-            gameOver = true;
-        }
-    }
 
     return{
         playRound,
