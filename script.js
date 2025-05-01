@@ -14,7 +14,17 @@ const gameBoard = (function (){
             } else{
                 return false;
             }
+        },
+
+        checkWins: (name, gameOver) => {
+            if (board[0] == board[1] && board[1] == board[2]){
+                console.log(`${name} has won!`);
+                gameOver = true;
+                return gameOver;
+            }
+        
         }
+
     }
 })();
 
@@ -60,41 +70,33 @@ function gameFlow(){
         console.log(`${activePlayer.name}'s turn.`);
     }
 
-    const checkWins = () => {
-        board = gameBoard.getBoard();
-        if (board[0] == board[1] && board[1] == board[2]){
-            console.log(`${activePlayer.name} has won!`)
-            gameOver = true
-        }
-
-    }
-
     const playRound = () => {
         let index = prompt(`${activePlayer.name}, Please enter where you want to place marker (1-9)`);
         while(!gameBoard.canMove(index-1, activePlayer.marker)){
             console.log("That place is taken or is off the grid, please try again");
             index = prompt(`${activePlayer.name}, Please enter marker at valid location (1-9)`);
         }
-        checkWins()
+
+        gameOver = gameBoard.checkWins(activePlayer.name);
         if (gameOver === true){
             reset();
+        } else{
+            switchPlayers();
+            printNewRound();
         }
-        //logic to check for wins
-        switchPlayers();
-        printNewRound();
-
     }
+
     init();
 
     const reset = () => {
         let reset = prompt("Do you want to restart? yes or no");
-        console.log(reset)
         if (reset.toLowerCase() == "y" || reset.toLowerCase() == "yes"){
             gameOver = false;
             init();
             console.log("Game restarted");
         }else{
-            console.log("Game will not be restarted")
+            console.log("Game will not be restarted");
+            gameOver = true;
         }
     }
 
