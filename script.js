@@ -30,7 +30,7 @@ function createPlayer(playerName, playerMarker){
 }
 
 
-function gameFlow (){
+function gameFlow(){
 
     let player1, player2;
     let activePlayer;
@@ -76,24 +76,36 @@ function gameFlow (){
             index = prompt(`${activePlayer.name}, Please enter marker at valid location (1-9)`);
         }
         checkWins()
-        console.log(gameOver)
+        if (gameOver === true){
+            reset();
+        }
         //logic to check for wins
         switchPlayers();
         printNewRound();
+
     }
     init();
 
-    const restart = () => {}
+    const reset = () => {
+        let reset = prompt("Do you want to restart? yes or no");
+        console.log(reset)
+        if (reset.toLowerCase() == "y" || reset.toLowerCase() == "yes"){
+            gameOver = false;
+            init();
+            console.log("Game restarted");
+        }else{
+            console.log("Game will not be restarted")
+        }
+    }
 
     return{
         playRound,
         getGameOver,
     }
-    
-};
+
+}
 
 let game = gameFlow();
-
 
 while (!game.getGameOver()){
    game.playRound()
