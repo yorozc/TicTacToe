@@ -61,6 +61,11 @@ function gameFlow (){
     }
 
     const checkWins = () => {
+        board = gameBoard.getBoard();
+        if (board[0] == board[1] && board[1] == board[2]){
+            console.log(`${activePlayer.name} has won!`)
+            gameOver = true
+        }
 
     }
 
@@ -70,11 +75,15 @@ function gameFlow (){
             console.log("That place is taken or is off the grid, please try again");
             index = prompt(`${activePlayer.name}, Please enter marker at valid location (1-9)`);
         }
+        checkWins()
+        console.log(gameOver)
         //logic to check for wins
         switchPlayers();
         printNewRound();
     }
-    init()
+    init();
+
+    const restart = () => {}
 
     return{
         playRound,
@@ -85,6 +94,9 @@ function gameFlow (){
 
 let game = gameFlow();
 
-while (game.getGameOver){
-    game.playRound()
+
+while (!game.getGameOver()){
+   game.playRound()
 }
+
+//game.playRound()
