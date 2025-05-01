@@ -36,7 +36,7 @@ function gameFlow (){
     let activePlayer;
     let gameOver = false;
 
-    function init(){
+    const init = () => {
         let user1 = prompt("Please enter player one's name:", "User1");
         let user2 = prompt("Please enter player two's name:", "User2");
 
@@ -51,7 +51,7 @@ function gameFlow (){
     const getGameOver = () => {return gameOver}
     
 
-    function switchPlayers(){
+    const switchPlayers = () => {
         activePlayer = activePlayer === player1 ? player2 : player1
     }
 
@@ -60,7 +60,11 @@ function gameFlow (){
         console.log(`${activePlayer.name}'s turn.`);
     }
 
-    function playRound(){
+    const checkWins = () => {
+
+    }
+
+    const playRound = () => {
         let index = prompt(`${activePlayer.name}, Please enter where you want to place marker (1-9)`);
         while(!gameBoard.canMove(index-1, activePlayer.marker)){
             console.log("That place is taken or is off the grid, please try again");
