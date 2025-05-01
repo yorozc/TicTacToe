@@ -17,7 +17,9 @@ const gameBoard = (function (){
         },
 
         checkWins: (name, gameOver) => {
-            if (board[0] == board[1] && board[1] == board[2]){
+            if ((board[0] && board[0] == board[1] && board[1] == board[2]) ||
+                (board[3] && board[3] == board[4] && board[4] == board[5]) ||
+                (board[6] && board[6] == board[7] && board[7] == board[8])){
                 console.log(`${name} has won!`);
                 gameOver = true;
                 return gameOver;
@@ -97,6 +99,7 @@ function gameFlow(){
 
         gameOver = gameBoard.checkWins(activePlayer.name);
         if (gameOver === true){
+            console.log(gameBoard.getBoard());
             reset();
         } else{
             switchPlayers();
