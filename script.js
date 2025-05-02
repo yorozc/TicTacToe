@@ -126,7 +126,7 @@ function gameFlow(){
 
 }
 
-let game = gameFlow();
+//let game = gameFlow();
 
 while (!game.getGameOver()){
    game.playRound()
