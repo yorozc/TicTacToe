@@ -58,17 +58,22 @@ function createPlayer(playerName, playerMarker){
 }
 
 const userPlay = (function() {
+    const container = document.querySelector(".tic-tac-toeContainer");
     
     return {
         clickCell: () =>{
-            const cells = document.querySelectorAll(".cell");
-
-            for (let i=0; i < cells.length; i++){
-                cells[i].addEventListener('click', () => {
-                    cells[i].textContent = 'X';
-                })
-            }
-        }
+            return new Promise((resolve) => {
+                const handler = (event) => {
+                    if (event.target.classList.contains("cell")){
+                        const selectedNumber = event.target.getAttribute("data-number");
+                        container.removeEventListener("click", handler);
+                        resolve(selectedNumber);
+                    }
+                };
+                container.addEventListener("click", handler);
+            });
+           
+        },
     }
 
 })();
@@ -115,39 +120,43 @@ function gameFlow(){
         }
     }
 
-    const playRound = () => {
-        let index = prompt(`${activePlayer.name}, Please enter where you want to place marker (1-9)`);
-        while(!gameBoard.canMove(index-1, activePlayer.marker)){
-            console.log("That place is taken or is off the grid, please try again");
-            index = prompt(`${activePlayer.name}, Please enter marker at valid location (1-9)`);
+    const playRound = async () => {
+
+        const selected = await userPlay.clickCell();
+        const index = parseInt(selected);
+
+        if (!gameBoard.canMove(index-1, activePlayer.marker)){
+            console.log("Invalid move. Click another square.");
+            return playRound();
         }
 
         gameOver = gameBoard.checkWins(activePlayer.name);
         if (gameOver === true){
             console.log(gameBoard.getBoard());
             reset();
-        } else{
+        }else{
             switchPlayers();
             printNewRound();
+            playRound();
         }
+
     }
 
-    init();
+    
 
     return{
         playRound,
         getGameOver,
+        init,
     }
 
 }
 
+let game = gameFlow();
 
-
-userPlay.clickCell()
-//let game = gameFlow();
-
-while (!game.getGameOver()){
-   game.playRound()
+function startGame(){
+    game.init();
+    game.playRound();
 }
 
 //game.playRound()
