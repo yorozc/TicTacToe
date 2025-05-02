@@ -64,3 +64,7 @@ body{}
     background-color: white;
     border-radius: 4px;
 }
+
+.cell:hover{
+    transform: scale(0.99);
+}

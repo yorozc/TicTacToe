@@ -57,6 +57,21 @@ function createPlayer(playerName, playerMarker){
     }
 }
 
+const userPlay = (function() {
+    
+    return {
+        clickCell: () =>{
+            const cells = document.querySelectorAll(".cell");
+
+            for (let i=0; i < cells.length; i++){
+                cells[i].addEventListener('click', () => {
+                    cells[i].textContent = 'X';
+                })
+            }
+        }
+    }
+
+})();
 
 function gameFlow(){
 
@@ -126,6 +141,9 @@ function gameFlow(){
 
 }
 
+
+
+userPlay.clickCell()
 //let game = gameFlow();
 
 while (!game.getGameOver()){
