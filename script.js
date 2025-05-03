@@ -65,9 +65,10 @@ const userPlay = (function() {
             return new Promise((resolve) => {
                 const handler = (event) => {
                     if (event.target.classList.contains("cell")){
-                        const selectedNumber = event.target.getAttribute("data-number");
+                        const element = event.target;
+                        const selected = event.target.getAttribute("data-number");
                         container.removeEventListener("click", handler);
-                        resolve(selectedNumber);
+                        resolve({selected, element});
                     }
                 };
                 container.addEventListener("click", handler);
@@ -85,6 +86,7 @@ function gameFlow(){
     let gameOver = false;
 
     const init = () => {
+        resetGrid();
         let user1 = prompt("Please enter player one's name:", "User1");
         let user2 = prompt("Please enter player two's name:", "User2");
 
@@ -92,8 +94,16 @@ function gameFlow(){
         player2 = createPlayer(user2, "O");
         activePlayer = player1;
         gameOver = false;
+        resetGrid();
         gameBoard.resetBoard();
         printNewRound()    
+    }
+
+    const resetGrid = () => {
+        const grid = document.querySelectorAll(".cell");
+        for(let i=0; i < grid.length; i++){
+            grid[i].textContent = "";
+        }
     }
 
     const getGameOver = () => {return gameOver}
@@ -122,8 +132,9 @@ function gameFlow(){
 
     const playRound = async () => {
 
-        const selected = await userPlay.clickCell();
+        const {selected, element} = await userPlay.clickCell();
         const index = parseInt(selected);
+       
 
         if (!gameBoard.canMove(index-1, activePlayer.marker)){
             console.log("Invalid move. Click another square.");
@@ -135,6 +146,7 @@ function gameFlow(){
             console.log(gameBoard.getBoard());
             reset();
         }else{
+            element.textContent = activePlayer.marker;
             switchPlayers();
             printNewRound();
             playRound();
