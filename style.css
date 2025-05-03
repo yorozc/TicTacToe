@@ -5,15 +5,18 @@
 }
 
 :root{
-
+    --background-color : rgb(197, 186, 124);
+    --column-hover: rgb(118, 231, 12);
 }
 
-body{}
+body{
+    font-family: Helvetica;
+}
 
 .main-container{
     height: 100vh;
     width: 100%;
-    background-color: rgb(197, 186, 124);
+    background-color: var(--background-color);
     display: flex;
     flex-direction: column;
 }
@@ -69,9 +72,19 @@ body{}
 }
 
 .cell:hover{
-    transform: scale(0.99);
+    animation: shake 2s infinite;
+    background-color: var(--column-hover);
 }
 
 .cell p{
     font-size: 10rem;
+}
+
+@keyframes shake {
+    
+    10% {transform: scale(1.05) rotate(5deg); }
+    20% {transform: scale(1.05) rotate(-5deg); }
+    30% {transform: scale(1.05) rotate(5deg); }
+    40% {transform: none; }
+    
 }

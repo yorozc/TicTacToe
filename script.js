@@ -3,7 +3,7 @@ const gameBoard = (function (){
                    "", "", "",
                    "", "", ""];
     return {
-        getBoard: () => [...board], //clones current state of board
+        getBoard: () => console.log([...board]), //clones current state of board
 
         resetBoard: () => board.fill(""), //empties each string element in board
         
@@ -16,7 +16,7 @@ const gameBoard = (function (){
             }
         },
 
-        win: (name) =>{
+        win: (name) => {
             console.log(`${name} has won!`);
             return true;
         },
@@ -64,7 +64,7 @@ const userPlay = (function() {
         clickCell: () =>{
             return new Promise((resolve) => {
                 const handler = (event) => {
-                    if (event.target.classList.contains("cell")){
+                    if (event.target.classList.contains("cell") && event.target.textContent === ""){
                         const element = event.target;
                         const symbol = document.createElement("p");
                         element.appendChild(symbol);
@@ -112,7 +112,7 @@ function gameFlow(){
     }
 
     const printNewRound = () => {
-        console.log(gameBoard.getBoard());
+        gameBoard.getBoard();
         console.log(`${activePlayer.name}'s turn.`);
     }
 
@@ -121,6 +121,7 @@ function gameFlow(){
         if (reset.toLowerCase() == "y" || reset.toLowerCase() == "yes"){
             gameOver = false;
             init();
+            playRound();
             console.log("Game restarted");
         }else{
             console.log("Game will not be restarted");
@@ -131,6 +132,7 @@ function gameFlow(){
     const playRound = async () => {
         const {selected, symbol} = await userPlay.clickCell();
         const index = parseInt(selected);
+        symbol.textContent = activePlayer.marker;
        
         if (!gameBoard.canMove(index-1, activePlayer.marker)){
             console.log("Invalid move. Click another square.");
@@ -139,10 +141,10 @@ function gameFlow(){
 
         gameOver = gameBoard.checkWins(activePlayer.name);
         if (gameOver === true){
-            console.log(gameBoard.getBoard());
+            gameBoard.getBoard();
+            symbol.textContent = activePlayer.marker;
             reset();
         }else{
-            symbol.textContent = activePlayer.marker;
             switchPlayers();
             printNewRound();
             playRound();
