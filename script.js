@@ -96,8 +96,6 @@ function gameFlow(){
         player2 = createPlayer(user2, "O");
         activePlayer = player1;
         gameOver = false;
-        resetGrid();
-        gameBoard.resetBoard();
         printNewRound()    
     }
 
@@ -106,6 +104,7 @@ function gameFlow(){
         for(let i=0; i < grid.length; i++){
             grid[i].textContent = "";
         }
+        gameBoard.resetBoard();
     }
 
     const getGameOver = () => {return gameOver}
@@ -133,11 +132,9 @@ function gameFlow(){
     }
 
     const playRound = async () => {
-
         const {selected, symbol} = await userPlay.clickCell();
         const index = parseInt(selected);
        
-
         if (!gameBoard.canMove(index-1, activePlayer.marker)){
             console.log("Invalid move. Click another square.");
             return playRound();
