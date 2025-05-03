@@ -105,10 +105,7 @@ function gameFlow(){
             grid[i].textContent = "";
         }
         gameBoard.resetBoard();
-    }
-
-    const getGameOver = () => {return gameOver}
-    
+    }    
 
     const switchPlayers = () => {
         activePlayer = activePlayer === player1 ? player2 : player1
@@ -153,11 +150,8 @@ function gameFlow(){
 
     }
 
-    
-
     return{
         playRound,
-        getGameOver,
         init,
         reset,
     }
