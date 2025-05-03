@@ -38,7 +38,6 @@ body{
     justify-content: space-between;
     background-color: var(--header-color);
     width: 100%;
-    height: 100px;
     padding: 24px;
 }
 
@@ -159,6 +158,16 @@ button:hover{
     font-size: 10rem;
     color: #000;
 }
+
+.winner, .draw{
+    border: 1px solid red;
+    background-color: blue;
+    width: 500px;
+    height: 250px;
+    position: absolute;
+}
+
+
 
 @keyframes shake {
     

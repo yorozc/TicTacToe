@@ -39,8 +39,7 @@ const gameBoard = (function (){
             }else{
                 if (!board.includes("")){
                     console.log("IT'S A DRAW!");
-                    gameOver = true;
-                    return gameOver;
+                    return true;
                 }
             }
         }
@@ -60,7 +59,6 @@ function createPlayer(playerName, playerMarker){
 
 const userPlay = (function() {
     const container = document.querySelector(".tic-tac-toeContainer");
-    
     return {
         clickCell: () =>{
             return new Promise((resolve) => {
@@ -132,11 +130,13 @@ function gameFlow(){
 
     const playRound = async () => {
         const {selected, symbol} = await userPlay.clickCell();
-        const index = parseInt(selected);
         symbol.textContent = activePlayer.marker;
+        const index = parseInt(selected);
+        
        
         if (!gameBoard.canMove(index-1, activePlayer.marker)){
             console.log("Invalid move. Click another square.");
+            //make glow red and shake really hard
             return playRound();
         }
 
@@ -149,15 +149,12 @@ function gameFlow(){
             printNewRound();
             playRound();
         }
-
     }
-
     return{
         playRound,
         init,
         reset,
     }
-
 }
 
 let game = gameFlow();
