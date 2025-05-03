@@ -66,9 +66,11 @@ const userPlay = (function() {
                 const handler = (event) => {
                     if (event.target.classList.contains("cell")){
                         const element = event.target;
+                        const symbol = document.createElement("p");
+                        element.appendChild(symbol);
                         const selected = event.target.getAttribute("data-number");
                         container.removeEventListener("click", handler);
-                        resolve({selected, element});
+                        resolve({selected, symbol});
                     }
                 };
                 container.addEventListener("click", handler);
@@ -132,7 +134,7 @@ function gameFlow(){
 
     const playRound = async () => {
 
-        const {selected, element} = await userPlay.clickCell();
+        const {selected, symbol} = await userPlay.clickCell();
         const index = parseInt(selected);
        
 
@@ -146,7 +148,7 @@ function gameFlow(){
             console.log(gameBoard.getBoard());
             reset();
         }else{
-            element.textContent = activePlayer.marker;
+            symbol.textContent = activePlayer.marker;
             switchPlayers();
             printNewRound();
             playRound();
@@ -160,6 +162,7 @@ function gameFlow(){
         playRound,
         getGameOver,
         init,
+        reset,
     }
 
 }
@@ -171,4 +174,6 @@ function startGame(){
     game.playRound();
 }
 
-//game.playRound()
+function resetGame(){
+    game.reset();
+}

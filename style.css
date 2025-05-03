@@ -61,10 +61,17 @@ body{}
 }
 
 .cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     border-radius: 4px;
 }
 
 .cell:hover{
     transform: scale(0.99);
+}
+
+.cell p{
+    font-size: 10rem;
 }
