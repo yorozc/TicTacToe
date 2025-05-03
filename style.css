@@ -5,13 +5,15 @@
 }
 
 :root{
-    --background-color : rgb(197, 186, 124);
+    --background-color : #fbfef9;
+    --header-color: #191923;
     --column-hover: rgb(118, 231, 12);
-    --button-color: #0A66C2;
+    --button-color: #0e79b2;
 }
 
 body{
     font-family: Helvetica;
+    color: white;
 }
 
 .main-container{
@@ -26,8 +28,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid black;
-    background-color: aliceblue;
+    background-color: var(--header-color);
     width: 100%;
     height: 100px;
     padding: 24px;
@@ -99,7 +100,8 @@ body{
 .buttons{
     display: flex;
     gap: 42px;
-    
+    width: 100%;
+    justify-content: center;
 }
 
 .buttons button{
