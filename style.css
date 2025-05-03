@@ -157,6 +157,7 @@ button:hover{
 
 .cell p{
     font-size: 10rem;
+    color: #000;
 }
 
 @keyframes shake {

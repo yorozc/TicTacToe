@@ -2,6 +2,11 @@ const gameBoard = (function (){
     const board = ["", "", "",
                    "", "", "",
                    "", "", ""];
+
+    function win(name){
+        console.log(`${name} has won!`);
+        return true;
+    }
     return {
         getBoard: () => console.log([...board]), //clones current state of board
 
@@ -16,24 +21,19 @@ const gameBoard = (function (){
             }
         },
 
-        win: (name) => {
-            console.log(`${name} has won!`);
-            return true;
-        },
-
         checkWins: function(name){
             if ((board[0] && board[0] == board[1] && board[1] == board[2]) || //horizontal
                 (board[3] && board[3] == board[4] && board[4] == board[5]) ||
                 (board[6] && board[6] == board[7] && board[7] == board[8])){
-                return this.win(name);
+                return win(name);
             }else if ((board[0] && board[0] == board[4] && board[4] == board[8]) || //diagonal
                       (board[2] && board[2] == board[4] && board[4] == board[6])){
-                return this.win(name);
+                return win(name);
                 
             }else if ((board[0] && board[0] == board[3] && board[3] == board[6]) || //vertical
                       (board[1] && board[1] == board[4] && board[4] == board[7]) ||
                       (board[2] && board[2] == board[5] && board[5] == board[8])){
-                return this.win(name);
+                return win(name);
 
             }else{
                 if (!board.includes("")){
@@ -118,7 +118,7 @@ function gameFlow(){
 
     const reset = () => {
         let reset = prompt("Do you want to restart? yes or no");
-        if (reset.toLowerCase() == "y" || reset.toLowerCase() == "yes"){
+        if (reset.toLowerCase() == "y" || reset.toLowerCase() == "yes" || reset == null){
             gameOver = false;
             init();
             playRound();
@@ -142,7 +142,6 @@ function gameFlow(){
         gameOver = gameBoard.checkWins(activePlayer.name);
         if (gameOver === true){
             gameBoard.getBoard();
-            symbol.textContent = activePlayer.marker;
             reset();
         }else{
             switchPlayers();
@@ -164,15 +163,13 @@ function changeMode(){
     const toggleButton = document.querySelector(".switch-mode");
     const githubLogo = document.getElementById("github-logo");
     const img1 = "resources/github-mark-white.png";
-    const img2 = "resources/github-mark.png"
+    const img2 = "resources/github-mark.png";
     toggleButton.addEventListener('click', () =>{
         document.body.classList.toggle('dark-mode');
         githubLogo.src = (githubLogo.src.includes(img1)) ? img2 : img1;
     });
 }
-
 let game = gameFlow();
-
 function startGame(){
     game.init();
     game.playRound();
