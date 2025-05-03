@@ -7,6 +7,7 @@ const gameBoard = (function (){
         console.log(`${name} has won!`);
         return true;
     }
+
     return {
         getBoard: () => console.log([...board]), //clones current state of board
 
@@ -118,7 +119,7 @@ function gameFlow(){
 
     const reset = () => {
         let reset = prompt("Do you want to restart? yes or no");
-        if (reset.toLowerCase() == "y" || reset.toLowerCase() == "yes" || reset == null){
+        if (reset.toLowerCase() == "y" || reset.toLowerCase() == "yes"){
             gameOver = false;
             init();
             playRound();
@@ -159,17 +160,8 @@ function gameFlow(){
 
 }
 
-function changeMode(){
-    const toggleButton = document.querySelector(".switch-mode");
-    const githubLogo = document.getElementById("github-logo");
-    const img1 = "resources/github-mark-white.png";
-    const img2 = "resources/github-mark.png";
-    toggleButton.addEventListener('click', () =>{
-        document.body.classList.toggle('dark-mode');
-        githubLogo.src = (githubLogo.src.includes(img1)) ? img2 : img1;
-    });
-}
 let game = gameFlow();
+
 function startGame(){
     game.init();
     game.playRound();
@@ -178,3 +170,13 @@ function startGame(){
 function resetGame(){
     game.reset();
 }
+
+// switch mode button
+const toggleButton = document.querySelector(".switch-mode");
+const githubLogo = document.getElementById("github-logo");
+const img1 = "resources/github-mark-white.png";
+const img2 = "resources/github-mark.png";
+toggleButton.addEventListener('click', () =>{
+    document.body.classList.toggle('dark-mode');
+    githubLogo.src = (githubLogo.src.includes(img1)) ? img2 : img1;
+});
