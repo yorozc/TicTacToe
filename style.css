@@ -9,11 +9,19 @@
     --header-color: #191923;
     --column-hover: rgb(118, 231, 12);
     --button-color: #0e79b2;
+    --text-color: #fff;
+}
+
+.dark-mode {
+    --background-color : #191923;
+    --header-color: #fbfef9;
+    --column-hover: rgb(118, 231, 12);
+    --text-color: #000;
 }
 
 body{
     font-family: Helvetica;
-    color: white;
+    color: var(--text-color);
 }
 
 .main-container{
@@ -48,7 +56,7 @@ body{
   border: 0;
   border-radius: 100px;
   box-sizing: border-box;
-  color: #ffffff;
+  color: var(--text-color);
   cursor: pointer;
   display: inline-flex;
   font-size: 16px;
@@ -74,7 +82,7 @@ body{
 .switch-mode:focus, .gameBtn:hover,
 .gameBtn:focus { 
   background-color: #16437E;
-  color: #ffffff;
+  color: var(--text-color);
 }
 
 .switch-mode:active, .gameBtn:active {

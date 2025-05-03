@@ -160,6 +160,17 @@ function gameFlow(){
 
 }
 
+function changeMode(){
+    const toggleButton = document.querySelector(".switch-mode");
+    const githubLogo = document.getElementById("github-logo");
+    const img1 = "resources/github-mark-white.png";
+    const img2 = "resources/github-mark.png"
+    toggleButton.addEventListener('click', () =>{
+        document.body.classList.toggle('dark-mode');
+        githubLogo.src = (githubLogo.src.includes(img1)) ? img2 : img1;
+    });
+}
+
 let game = gameFlow();
 
 function startGame(){
