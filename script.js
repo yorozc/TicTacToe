@@ -4,6 +4,11 @@ const gameBoard = (function (){
                    "", "", ""];
 
     function win(name){
+        name = name.toUpperCase();
+        const winner = document.querySelector(".winner");
+        const message = document.getElementById("winnerMsg");
+        message.textContent = `${name} IS THE WINNER!`;
+        winner.style.display = "block";
         console.log(`${name} has won!`);
         return true;
     }
@@ -38,6 +43,10 @@ const gameBoard = (function (){
 
             }else{
                 if (!board.includes("")){
+                    const draw = document.querySelector(".draw");
+                    const message = document.getElementById("drawMsg");
+                    message.textContent = `IT'S A DRAW!`;
+                    draw.style.display = "block";
                     console.log("IT'S A DRAW!");
                     return true;
                 }
@@ -99,6 +108,10 @@ function gameFlow(){
     }
 
     const resetGrid = () => {
+        const winner = document.querySelector(".winner");
+        winner.style.display = "none";
+        const draw = document.querySelector(".draw");
+        draw.style.display = "none";
         const grid = document.querySelectorAll(".cell");
         for(let i=0; i < grid.length; i++){
             grid[i].textContent = "";
@@ -143,7 +156,7 @@ function gameFlow(){
         gameOver = gameBoard.checkWins(activePlayer.name);
         if (gameOver === true){
             gameBoard.getBoard();
-            reset();
+            
         }else{
             switchPlayers();
             printNewRound();
