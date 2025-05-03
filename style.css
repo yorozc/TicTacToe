@@ -7,6 +7,7 @@
 :root{
     --background-color : rgb(197, 186, 124);
     --column-hover: rgb(118, 231, 12);
+    --button-color: #0A66C2;
 }
 
 body{
@@ -42,14 +43,13 @@ body{
 
 .switch-mode {
   align-items: center;
-  background-color: #0A66C2;
+  background-color: var(--button-color);
   border: 0;
   border-radius: 100px;
   box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
   display: inline-flex;
-  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 600;
   justify-content: center;
@@ -70,20 +70,15 @@ body{
 }
 
 .switch-mode:hover,
-.switch-mode:focus { 
+.switch-mode:focus, .gameBtn:hover,
+.gameBtn:focus { 
   background-color: #16437E;
   color: #ffffff;
 }
 
-.switch-mode:active {
+.switch-mode:active, .gameBtn:active {
   background: #09223b;
   color: rgb(255, 255, 255, .7);
-}
-
-.switch-mode:disabled { 
-  cursor: not-allowed;
-  background: rgba(0, 0, 0, .08);
-  color: rgba(0, 0, 0, .3);
 }
 
 .header .right-side{
@@ -108,11 +103,16 @@ body{
 }
 
 .buttons button{
-    width: 75px;
+    width: 100px;
     height: 50px;
     border: none;
     border-radius: 16px;
-    font-size: 24px;
+    font-size: 16px;
+    background-color: var(--button-color);
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px;
     
 }
 
