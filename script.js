@@ -8,7 +8,7 @@ const gameBoard = (function (){
         const winner = document.querySelector(".winner");
         const message = document.getElementById("winnerMsg");
         message.textContent = `${name} IS THE WINNER!`;
-        winner.style.display = "block";
+        winner.style.display = "flex";
         console.log(`${name} has won!`);
         return true;
     }
@@ -46,7 +46,7 @@ const gameBoard = (function (){
                     const draw = document.querySelector(".draw");
                     const message = document.getElementById("drawMsg");
                     message.textContent = `IT'S A DRAW!`;
-                    draw.style.display = "block";
+                    draw.style.display = "flex";
                     console.log("IT'S A DRAW!");
                     return true;
                 }
