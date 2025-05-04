@@ -58,11 +58,7 @@ const gameBoard = (function (){
 function createPlayer(playerName, playerMarker){
     return {
         name: playerName,
-        marker: playerMarker,
-        score: 0,
-        incrementScore() {
-            this.score++;
-        }
+        marker: playerMarker
     }
 }
 
